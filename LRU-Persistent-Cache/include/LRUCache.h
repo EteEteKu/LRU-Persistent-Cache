@@ -9,6 +9,9 @@ public:
 	LRUcache(size_t limit_cache);	
 	std::optional<std::string> get(std::string_view key);
 	void put(std::string key, std::string value);
+	bool del(std::string_view key);
+	const std::list<std::pair<std::string, std::string>>& items() const;
+
 
 private:
 	size_t limit_cache_;

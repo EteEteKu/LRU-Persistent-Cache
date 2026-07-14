@@ -33,3 +33,17 @@ std::optional<std::string> LRUcache::evict() {
 	index_.erase(delete_key.first);
 	return delete_key.first;
 }
+
+bool LRUcache::del(std::string_view key) {
+	auto it = index_.find(std::string(key));
+	if (it == index_.end()) {
+		return false;
+	}
+	items_.erase(it->second);
+	index_.erase(it);
+	return true;
+}
+
+const std::list<std::pair<std::string, std::string>>& LRUcache::items() const {
+	return items_;
+}

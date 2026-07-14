@@ -2,7 +2,7 @@
 #include "KVstore.h"
 
 TEST_CASE("SET and GET basic value", "[kvstore]") {
-	KVstore store;
+	KVstore store(3);
 	store.set("a", "1");
 	auto result = store.get("a");
 	REQUIRE(result.has_value());
@@ -10,13 +10,13 @@ TEST_CASE("SET and GET basic value", "[kvstore]") {
 }
 
 TEST_CASE("GET on missing key returns nullopt", "[kvstore]") {
-	KVstore store;
+	KVstore store(3);
 	auto result = store.get("testmissing");
 	REQUIRE_FALSE(result.has_value());
 }
 
-TEST_CASE("SET overwrites existing key", "[lvstore]") {
-	KVstore store;
+TEST_CASE("SET overwrites existing key", "[kvstore]") {
+	KVstore store(3);
 	store.set("a", "1");
 	store.set("a", "2");
 	auto result = store.get("a");
@@ -25,20 +25,20 @@ TEST_CASE("SET overwrites existing key", "[lvstore]") {
 }
 
 TEST_CASE("DEL removes existing key", "[kvstore]") {
-	KVstore store;
+	KVstore store(3);
 	store.set("a", "1");
 	bool deleted = store.del("a");
 	REQUIRE(deleted == true);
 	REQUIRE_FALSE(store.get("a").has_value());
 }
 TEST_CASE("DEL on missing key returns false", "[kvstore]") {
-	KVstore store;
+	KVstore store(3);
 	bool deleted = store.del("missing");
 	REQUIRE(deleted == false);
 }
 
 TEST_CASE("SET -> DEL -> SET", "[kvstore]") {
-	KVstore store;
+	KVstore store(3);
 	store.set("a", "1");
 
 	bool deleted = store.del("a");

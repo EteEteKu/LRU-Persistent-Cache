@@ -1,13 +1,16 @@
 #pragma once
 #include <string>
-#include <unordered_map>
 #include <optional>
-
+#include "LRUCache.h"
+#include <filesystem>
 class KVstore {
 public:
-	void set(std::string key, std::string value);
-	std::optional<std::string> get(std::string_view key) const;
-	bool del(std::string_view key);	
+    explicit KVstore(size_t limit);
+    void set(std::string key, std::string value);
+    std::optional<std::string> get(std::string_view key);
+    bool del(std::string_view key);
+    bool saveSnapshot(const std::filesystem::path& path);
+    bool loadSnapshot(const std::filesystem::path& path);
 private:
-	std::unordered_map<std::string, std::string> data_;
+    LRUcache cache_;
 };

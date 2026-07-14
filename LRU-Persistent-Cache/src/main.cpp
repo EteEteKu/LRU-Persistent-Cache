@@ -8,11 +8,16 @@
 int main() {
 	std::setlocale(LC_ALL, "Russian");
 
-	KVstore store;
+	KVstore store(4);
 	std::string line;
 
+	store.loadSnapshot("snapshot.dat");
 	while (std::getline(std::cin, line)) {
-		if (line == "exit") break;
+		if (line == "exit") {
+			store.saveSnapshot("snapshot.dat");
+
+			break;
+		}
 		std::istringstream iss(line);
 		std::string command;
 		iss >> command;
