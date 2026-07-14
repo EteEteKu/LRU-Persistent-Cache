@@ -1,5 +1,5 @@
 ﻿# CMakeList.txt: проект CMake для LRU-Persistent-Cache
-add_executable (LRU-Persistent-Cache "src/main.cpp" "include/KVstore.h" "src/KVstore.cpp" "include/LRUCache.h" "src/LRUCache.cpp")
+add_executable (LRU-Persistent-Cache "src/main.cpp" "include/KVstore.h" "src/KVstore.cpp" "include/LRUCache.h" "src/LRUcache.cpp")
 
 target_include_directories(LRU-Persistent-Cache PRIVATE include)
 
