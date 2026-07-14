@@ -10,6 +10,6 @@ if (POLICY CMP0141)
 endif()
 
 project ("LRU-Persistent-Cache")
-
 # Включите подпроекты.
 add_subdirectory ("LRU-Persistent-Cache")
+
